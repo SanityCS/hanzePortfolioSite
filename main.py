@@ -1,8 +1,12 @@
 from flask import Flask, render_template, request, url_for, flash, redirect, abort
 import sqlite3
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'ea579ce9def1ffca2d3dfd78a6aa9c9760b270950268405b'
+app.config['SECRET_KEY'] = os.getenv('app_key')
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
@@ -100,4 +104,6 @@ def delete(id):
     conn.close()
     flash('"{}" was successfully deleted from the posts!'.format(post['title']))
     return redirect(url_for('posts'))
-app.run(debug=True)
+
+if __name__ == "__main__":
+    app.run(debug=True)
