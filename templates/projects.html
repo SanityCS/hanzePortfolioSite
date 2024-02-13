@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sanity - Projects</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="icon" href="media\website_icon.png" type="image/png">
+    <link href="{{url_for('static', filename='css/output.css')}}" rel="stylesheet">
+    <link rel="icon" href="{{url_for('static', filename='media/website_icon.png')}}" type="image/png">
   </head>
 
-  <body id="projects-body">
-    <header>
-      <h1>Sanity</h1>
-      <p>Security Student</p>
+  <body class="font-sans bg-purple-300 flex flex-col h-screen">
+    <header class="bg-gray-900 text-white text-center py-4">
+      <h1 class="text-2xl">Sanity</h1>
+      <p class="text-sm">Security Student</p>
       <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="projects.html">Projects</a>
-        <a href="notes.html">Notes</a>
+        <a href="{{url_for('index')}}" class="text-white hover:underline">Home</a>
+        <a href="{{url_for('about')}}" class="text-white hover:underline ml-4">About</a>
+        <a href="{{url_for('posts')}}" class="text-white hover:underline ml-4">Posts</a>
+        <a href="{{url_for('projects')}}" class="text-white hover:underline ml-4">Projects</a>
       </nav>
     </header>
 
@@ -25,8 +25,8 @@
     </section>
 
 
-    <footer>
+    <footer class="mt-auto bg-gray-900 text-white text-center py-4">
       <p>&copy; 2024 Sanity. All rights reserved.</p>
     </footer>
   </body>
-
+</html>

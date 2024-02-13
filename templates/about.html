@@ -1,62 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sanity - About Me</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="icon" href="media\website_icon.png" type="image/png">
-</head>
+    <link href="{{url_for('static', filename='css/output.css')}}" rel="stylesheet">
+    <link rel="icon" href="{{url_for('static', filename='media/website_icon.png')}}" type="image/png">
+  </head>
 
-<body id="about-body" class="font-sans bg-purple-200 flex flex-col h-screen">
+  <body class="font-sans bg-purple-300 flex flex-col h-screen">
     <header class="bg-gray-900 text-white text-center py-4">
-        <h1 class="text-2xl">Sanity</h1>
-        <p class="text-sm">Security Student</p>
-        <nav>
-            <a href="index.html" class="text-white hover:underline">Home</a>
-            <a href="about.html" class="text-white hover:underline ml-4">About</a>
-            <a href="projects.html" class="text-white hover:underline ml-4">Projects</a>
-            <a href="notes.html" class="text-white hover:underline ml-4">Notes</a>
-        </nav>
+      <h1 class="text-2xl">Sanity</h1>
+      <p class="text-sm">Security Student</p>
+      <nav>
+        <a href="{{url_for('index')}}" class="text-white hover:underline">Home</a>
+        <a href="{{url_for('about')}}" class="text-white hover:underline ml-4">About</a>
+        <a href="{{url_for('posts')}}" class="text-white hover:underline ml-4">Posts</a>
+        <a href="{{url_for('projects')}}" class="text-white hover:underline ml-4">Projects</a>
+      </nav>
     </header>
 
     <section class="mx-auto mt-8 mb-4 px-8 py-4 bg-gray-800 rounded-md shadow-md">
-        <h2 class="text-2xl text-purple-500 mb-4">About Me</h2>
-        <p class="text-white mb-4">
-            Hey there! I'm a 20-year-old on a mission in the world of cybersecurity. Born with a natural curiosity for all things tech, 
-            I've started my journey to study about protecting and securing tech.
-        </p>
-        <p class="text-white mb-4">
-            Here are a few key points about me:
-        </p>
-        <ul id="about-keypoints" class="list-disc pl-4 text-white mb-4">
-            <li>Currently studying for a degree in Network and Security Engineering</li>
-            <li>Experience with Cisco systems</li>
-            <li>Really passionate about learning new technologies</li>
-            <li>Excellent problem-solving and communication skills</li>
-            <li>Massive love for cryptography, hashing, and encryption</li>
-        </ul>
-        <p class="text-white mt-4">
-            Feel free to explore my portfolio to learn more about my projects and skills!
-        </p>
-        <p class="text-white text-md mt-10 text-center">
-            Special Gratitude
-        </p>
-        <p class="text-white text-sm mt-5 text-center">
-            I would like to thank my amazing girlfriend for all her support in my craft
-        </p>
-        <p class="text-white text-sm text-center">
-            and giving me the constant motivation to keep striving to get better
-        </p>
-        <p class="text-purple-600 mt-5 text-lg text-center">
-            I love you Mae <3
-        </p>
+      <h2 class="text-2xl text-purple-500 mb-4">About Me</h2>
+      <p class="text-white mb-4">
+        Hey there! I'm a 20-year-old on a mission in the world of cybersecurity. Born with a natural curiosity for all things tech, 
+        I've started my journey to study about protecting and securing tech.
+      </p>
+      <p class="text-white mb-4">
+        Here are a few key points about me:
+      </p>
+      <ul id="about-keypoints" class="list-disc pl-4 text-white mb-4">
+        <li>Currently studying for a degree in Network and Security Engineering</li>
+        <li>Experience with Cisco systems</li>
+        <li>Really passionate about learning new technologies</li>
+        <li>Excellent problem-solving and communication skills</li>
+        <li>Massive love for cryptography, hashing, and encryption</li>
+      </ul>
+      <p class="text-white mt-4">
+        Feel free to explore my portfolio to learn more about my projects and skills!
+      </p>
+      <p class="text-white text-md mt-10 text-center">
+        Special Gratitude
+      </p>
+      <p class="text-white text-sm mt-5 text-center">
+        I would like to thank my amazing girlfriend for all her support in my craft
+      </p>
+      <p class="text-white text-sm text-center">
+        and giving me the constant motivation to keep striving to get better
+      </p>
+      <p class="text-purple-600 mt-5 text-lg text-center">
+        I love you Mae <3
+      </p>
     </section>
 
     <footer class="mt-auto bg-gray-900 text-white text-center py-4">
-        <p>&copy; 2024 Sanity. All rights reserved.</p>
+      <p>&copy; 2024 Sanity. All rights reserved.</p>
     </footer>
-</body>
-
+  </body>
 </html>

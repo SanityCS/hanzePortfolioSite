@@ -1,76 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sanity - Portfolio</title>
     <link href="{{url_for('static', filename='css/output.css')}}" rel="stylesheet">
     <link rel="icon" href="{{url_for('static', filename='media/website_icon.png')}}" type="image/png">
+  </head>
 
-</head>
-
-<body class="flex flex-col min-h-screen font-sans bg-purple-200">
+  <body class="flex flex-col min-h-screen font-sans bg-purple-300">
     <header class="bg-gray-900 text-white text-center py-4">
-        <h1 class="text-2xl">Sanity</h1>
-        <p class="text-sm">Security Student</p>
-        <nav>
-            <a href="{{url_for('index')}}" class="text-white hover:underline">Home</a>
-            <a href="{{url_for('about')}}" class="text-white hover:underline ml-4">About</a>
-            <a href="{{url_for('projects')}}" class="text-white hover:underline ml-4">Projects</a>
-            <a href="{{url_for('notes')}}" class="text-white hover:underline ml-4">Notes</a>
-        </nav>
+      <h1 class="text-2xl">Sanity</h1>
+      <p class="text-sm">Security Student</p>
+      <nav>
+        <a href="{{url_for('index')}}" class="text-white hover:underline">Home</a>
+        <a href="{{url_for('about')}}" class="text-white hover:underline ml-4">About</a>
+        <a href="{{url_for('posts')}}" class="text-white hover:underline ml-4">Posts</a>
+        <a href="{{url_for('projects')}}" class="text-white hover:underline ml-4">Projects</a>
+      </nav>
     </header>
 
     <main class="flex-grow">
-        <div class="flex flex-col md:flex-row">
-            <section class="max-w-screen-md mx-auto my-8 px-8 py-6 bg-gray-800 rounded-md shadow-md md:w-1/2 md:mr-2">
-                <h2 class="text-2xl text-purple-500">About Me</h2>
-                <p class="text-white mt-4">
-                    Welcome to my portfolio! I am an aspiring Cryptography specialist, currently studying Network and Security
-                    Engineering at the Hanze in Groningen, the Netherlands.
-                </p>
-                <p class="text-white mt-4">
-                    I am studying at the moment but I won't wait for school to teach me things that I could teach myself. I'm 
-                    always trying to learn new stuff and love to study when I have free time. 
-                </p>
-            </section>
-
-            <section class="max-w-screen-md mx-auto my-8 px-8 py-6 bg-gray-800 rounded-md shadow-md md:w-1/2 md:ml-2">
-                <h2 class="text-2xl text-purple-500">Projects</h2>
-                <ul class="mt-4 list-disc">
-                    <li class="text-white mb-2">
-                        <strong>University project repo</strong>
-                        <a href="https://github.com/SanityCS/UniProjects" target="_blank"
-                            class="text-blue-500 hover:text-blue-400 ml-2">
-                            <img src="{{url_for('static', filename='media/github-mark-white.svg')}}" alt="GitHub Icon" width="16" height="16">
-                        </a>
-                        <p class="project-description"> General repo for all my university work. </p>
-                    </li>
-                    <li class="text-white mb-2">
-                        <strong>Discord Library</strong>
-                        <a href="https://github.com/SanityCS/saniLib" target="_blank"
-                            class="text-blue-500 hover:text-blue-400 ml-2">
-                            <img src="{{url_for('static', filename='media/github-mark-white.svg')}}" alt="GitHub Icon" width="16" height="16">
-                        </a>
-                        <p class="project-description"> Discord library to learn how to program </p>
-                    </li>
-                </ul>
-            </section>
-        </div>
-
-        <section class="max-w-screen-md mx-auto my-8 px-8 py-6 bg-gray-800 rounded-md shadow-md">
-            <h2 class="text-2xl text-purple-500">Contact</h2>
-            <p class="text-white mt-4">
-                Feel free to contact me! You can reach me via email at <a href="mailto:sanitycs@proton.me"
-                    class="text-blue-500 hover:text-blue-400">sanitycs@proton.me</a>.
-            </p>
+      <div class="flex flex-col md:flex-row">
+        <section class="max-w-screen-md mx-auto my-8 px-8 py-6 bg-gray-800 rounded-md shadow-md md:w-1/2 md:mr-2">
+          <h2 class="text-2xl text-purple-500">About Me</h2>
+          <p class="text-white mt-4">
+            Welcome to my portfolio! I am an aspiring Cryptography specialist, currently studying Network and Security
+            Engineering at the Hanze in Groningen, the Netherlands.
+          </p>
+          <p class="text-white mt-4">
+            I am studying at the moment but I won't wait for school to teach me things that I could teach myself. I'm 
+            always trying to learn new stuff and love to study when I have free time. 
+          </p>
         </section>
+
+        <section class="max-w-screen-md mx-auto my-8 px-8 py-6 bg-gray-800 rounded-md shadow-md md:w-1/2 md:ml-2">
+          <h2 class="text-2xl text-purple-500">Projects</h2>
+          <ul class="mt-4 list-disc">
+            <li class="text-white mb-2">
+              <strong>University project repo</strong>
+              <a href="https://github.com/SanityCS/UniProjects" target="_blank"
+                class="text-blue-500 hover:text-blue-400 ml-2">
+                <img src="{{url_for('static', filename='media/github-mark-white.svg')}}" alt="GitHub Icon" width="16" height="16">
+              </a>
+              <p class="project-description"> General repo for all my university work. </p>
+            </li>
+            <li class="text-white mb-2">
+              <strong>Discord Library</strong>
+              <a href="https://github.com/SanityCS/saniLib" target="_blank"
+                class="text-blue-500 hover:text-blue-400 ml-2">
+                <img src="{{url_for('static', filename='media/github-mark-white.svg')}}" alt="GitHub Icon" width="16" height="16">
+              </a>
+              <p class="project-description"> Discord library to learn how to program </p>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <section class="max-w-screen-md mx-auto my-8 px-8 py-6 bg-gray-800 rounded-md shadow-md">
+        <h2 class="text-2xl text-purple-500">Contact</h2>
+        <p class="text-white mt-4">
+          Feel free to contact me! You can reach me via email at <a href="mailto:sanitycs@proton.me"
+            class="text-blue-500 hover:text-blue-400">sanitycs@proton.me</a>.
+        </p>
+      </section>
     </main>
 
     <footer class="text-white text-center py-4 bg-gray-900 mt-auto">
-        <p>&copy; 2024 Sanity. All rights reserved.</p>
+      <p>&copy; 2024 Sanity. All rights reserved.</p>
     </footer>
-</body>
-
+  </body>
 </html>
