@@ -1,47 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sanity - Posts</title>
-  <link href="{{url_for('static', filename='css/output.css')}}" rel="stylesheet">
-  <link rel="icon" href="{{url_for('static', filename='media/website_icon.png')}}" type="image/png">
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanity - Posts</title>
+    <link href="{{url_for('static', filename='css/output.css')}}" rel="stylesheet">
+    <link rel="icon" href="{{url_for('static', filename='media/website_icon.png')}}" type="image/png">
+  </head>
 
-<body class="flex flex-col min-h-screen font-sans bg-purple-300">
-  <header class="bg-gray-900 text-white text-center py-4">
-    <h1 class="text-2xl">Sanity</h1>
-    <p class="text-sm">Security Student</p>
-    <nav>
-      <a href="{{url_for('index')}}" class="text-white hover:underline">Home</a>
-      <a href="{{url_for('about')}}" class="text-white hover:underline ml-4">About</a>
-      <a href="{{url_for('posts')}}" class="text-white hover:underline ml-4">Posts</a>
-      <a href="{{url_for('projects')}}" class="text-white hover:underline ml-4">Projects</a>
-    </nav>
-  </header>
-  
-  <main class="flex-grow">
-    {% extends 'base.html' %}
-    {% block title %} Posts {% endblock %}
-    {% block content %}
-    <section class="mx-auto mt-8 mb-4 px-8 py-4 bg-gray-800 rounded-md shadow-md">
-        <h1 class="text-white text-2xl py-8 mb-8">Posts</h1>
-        {% for post in posts %}
-          <div class="text-sm">
-              <h2 class="text-white text-lg mt-8">{{post['title']}}</h2>
-              <p class="text-white">{{post['created'] }}</p>
+  <body class="font-sans bg-purple-300 flex flex-col min-h-screen">
+    <header class="bg-gray-900 text-white text-center py-4">
+      <h1 class="text-2xl">Sanity</h1>
+      <p class="text-sm">Security Student</p>
+      <nav>
+        <a href="{{url_for('index')}}" class="text-white hover:underline">Home</a>
+        <a href="{{url_for('about')}}" class="text-white hover:underline ml-4">About</a>
+        <a href="{{url_for('posts')}}" class="text-white hover:underline ml-4">Posts</a>
+        <a href="{{url_for('projects')}}" class="text-white hover:underline ml-4">Projects</a>
+      </nav>
+    </header>
+
+    <main class="flex-grow">
+      {% block content %}
+      <section class="mt-8 mb-4 px-8 py-4 bg-gray-800 rounded-md shadow-md relative max-w-3xl mx-auto">
+        <h1 class="text-purple-500 text-2xl py-8">Posts</h1>
+        <a href="{{ url_for('create') }}" class="absolute top-0 right-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create New Post</a>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {% for post in posts %}
+          <div class="bg-blue-500 rounded-md shadow-md m-4 mb-4 text-sm relative">
+            <div class="p-6">
+              <h2 class="text-white text-lg mb-2">{{post['title']}}</h2>
+              <p class="text-white mb-2">{{post['created'] }}</p>
               <p class="text-white">{{post['content']}}</p>
+              <a class="text-white text-lg absolute bottom-0 right-0 mr-4 mb-4" href="{{ url_for('edit', id=post['id']) }}">Edit</a>
+            </div>
           </div>
-        {% endfor %}
-    </section>
- 
-  </main>
+          {% endfor %}
+        </div>
+      </section>
+      {% endblock %}
+    </main>
 
-  <footer class="bg-gray-900 text-white text-center py-4">
-    <p>&copy; 2024 Sanity. All rights reserved.</p>
-  </footer>
-  {% endblock %}
-</body>
+    <footer class="bg-gray-900 text-white text-center py-4 mt-auto">
+      <p>&copy; 2024 Sanity. All rights reserved.</p>
+    </footer>
+
+  </body>
 
 </html>
