@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tailwind": "npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch"
+    "tailwind": "npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch",
+    "flask": "py main.py"
   },
   "keywords": [],
   "author": "",
