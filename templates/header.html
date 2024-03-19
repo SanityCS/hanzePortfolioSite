@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanity - Posts</title>
+    <link href="{{url_for('static', filename='css/output.css')}}" rel="stylesheet">
+    <link rel="icon" href="{{url_for('static', filename='media/website_icon.png')}}" type="image/png">
+</head>
+
+<body class="flex flex-col min-h-screen font-sans bg-purple-300">
+    <header class="bg-gray-900 text-white text-center py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl">Sanity</h1>
+                <p class="text-sm">Security Student</p>
+            </div>
+            <nav>
+                <a href="{{url_for('index')}}" class="text-white hover:underline">Home</a>
+                <a href="{{url_for('about')}}" class="text-white hover:underline ml-4">About</a>
+                <a href="{{url_for('posts')}}" class="text-white hover:underline ml-4">Posts</a>
+                <a href="{{url_for('projects')}}" class="text-white hover:underline ml-4">Projects</a>
+                {% if current_user.is_authenticated %}
+                <form action="{{ url_for('logout') }}" method="post" class="inline">
+                    <button type="submit" class="text-white hover:underline ml-4">Logout</button>
+                </form>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+</body>
+</html>

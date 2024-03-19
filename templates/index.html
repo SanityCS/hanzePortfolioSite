@@ -18,6 +18,13 @@
         <a href="{{url_for('about')}}" class="text-white hover:underline ml-4">About</a>
         <a href="{{url_for('posts')}}" class="text-white hover:underline ml-4">Posts</a>
         <a href="{{url_for('projects')}}" class="text-white hover:underline ml-4">Projects</a>
+        {% if current_user.is_authenticated %}
+            <form action="{{ url_for('logout') }}" method="post" class="inline">
+                <button type="submit" class="text-white hover:underline ml-4">Logout</button>
+            </form>
+            {% else %}
+            <a href="{{ url_for('login') }}" class="text-white hover:underline ml-4">Login</a>
+            {% endif %}
       </nav>
     </header>
 
@@ -65,8 +72,27 @@
             class="text-blue-500 hover:text-blue-400">sanitycs@proton.me</a>.
         </p>
       </section>
+      {% if get_flashed_messages() %}
+      <section id="flash-messages" class="fixed top-3/4 left-1/2 transform -translate-x-1/2 bg-gray-800 rounded-md shadow-md p-4">
+        <div class="content">
+            {% for message in get_flashed_messages() %}
+            <div class="alert bg-purple-600 text-white rounded-md py-2 px-4 mb-2">{{ message }}</div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
     </main>
-
+    <script>
+      setTimeout(function() {
+          var flashMessages = document.getElementById('flash-messages');
+          if (flashMessages) {
+              flashMessages.style.opacity = '0';
+              setTimeout(function() {
+                  flashMessages.remove();
+              }, 500);
+          }
+      }, 3000);
+  </script>
     <footer class="text-white text-center py-4 bg-gray-900 mt-auto">
       <p>&copy; 2024 Sanity. All rights reserved.</p>
     </footer>

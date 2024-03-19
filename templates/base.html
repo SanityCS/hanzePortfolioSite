@@ -1,43 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sanity - Posts</title>
     <link href="{{url_for('static', filename='css/output.css')}}" rel="stylesheet">
     <link rel="icon" href="{{url_for('static', filename='media/website_icon.png')}}" type="image/png">
-  </head>
+</head>
 
-  <body class="flex flex-col min-h-screen font-sans bg-purple-300">
+<body class="flex flex-col min-h-screen font-sans bg-purple-300">
     <header class="bg-gray-900 text-white text-center py-4">
-      <h1 class="text-2xl">Sanity</h1>
-      <p class="text-sm">Security Student</p>
-      <nav>
-        <a href="{{url_for('index')}}" class="text-white hover:underline">Home</a>
-        <a href="{{url_for('about')}}" class="text-white hover:underline ml-4">About</a>
-        <a href="{{url_for('posts')}}" class="text-white hover:underline ml-4">Posts</a>
-        <a href="{{url_for('projects')}}" class="text-white hover:underline ml-4">Projects</a>
-      </nav>
+        <div class="container mx-auto">
+            <h1 class="text-2xl mt-0">Sanity</h1>
+            <p class="text-sm">Security Student</p>
+            <nav class="mt-0">
+                <a href="{{url_for('index')}}" class="text-white hover:underline">Home</a>
+                <a href="{{url_for('about')}}" class="text-white hover:underline ml-4">About</a>
+                <a href="{{url_for('posts')}}" class="text-white hover:underline ml-4">Posts</a>
+                <a href="{{url_for('projects')}}" class="text-white hover:underline ml-4">Projects</a>
+                {% if current_user.is_authenticated %}
+                <form action="{{ url_for('logout') }}" method="post" class="inline">
+                    <button type="submit" class="text-white hover:underline ml-4">Logout</button>
+                </form>
+                {% else %}
+                <a href="{{ url_for('login') }}" class="text-white hover:underline ml-4">Login</a>
+                {% endif %}
+            </nav>
+        </div>
     </header>
 
-    <section class="bg-gray-800 mt-5 pl-5 pr-5 rounded-md shadow-md">
-        <div class="content">
+    {% if get_flashed_messages() %}
+    <section id="flash-messages" class="fixed top-3/4 left-1/2 transform -translate-x-1/2 bg-gray-800 rounded-md shadow-md p-4">
+      <div class="content">
           {% for message in get_flashed_messages() %}
-          <div class="alert text-white">{{ message }}</div>
+          <div class="alert bg-purple-600 text-white rounded-md py-2 px-4 mb-2">{{ message }}</div>
           {% endfor %}
-      </section>
-
-    <main class="flex-grow">
-    
-        {% block content %} {% endblock %}
       </div>
+  </section>
+  {% endif %}
+  <script>
+    setTimeout(function() {
+        var flashMessages = document.getElementById('flash-messages');
+        if (flashMessages) {
+            flashMessages.style.opacity = '0';
+            setTimeout(function() {
+                flashMessages.remove();
+            }, 500);
+        }
+    }, 3000);
+</script>
+    <main class="flex-grow">
+
+        {% block content %} {% endblock %}
     </main>
 
     <footer class="bg-gray-900 text-white text-center py-4">
-      <p>&copy; 2024 Sanity. All rights reserved.</p>
+        <p>&copy; 2024 Sanity. All rights reserved.</p>
     </footer>
 
-  </body>
+</body>
 
 </html>

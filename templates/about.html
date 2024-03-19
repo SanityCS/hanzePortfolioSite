@@ -18,6 +18,13 @@
         <a href="{{url_for('about')}}" class="text-white hover:underline ml-4">About</a>
         <a href="{{url_for('posts')}}" class="text-white hover:underline ml-4">Posts</a>
         <a href="{{url_for('projects')}}" class="text-white hover:underline ml-4">Projects</a>
+        {% if current_user.is_authenticated %}
+            <form action="{{ url_for('logout') }}" method="post" class="inline">
+                <button type="submit" class="text-white hover:underline ml-4">Logout</button>
+            </form>
+            {% else %}
+            <a href="{{ url_for('login') }}" class="text-white hover:underline ml-4">Login</a>
+            {% endif %}
       </nav>
     </header>
 

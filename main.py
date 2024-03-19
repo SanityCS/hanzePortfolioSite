@@ -1,31 +1,42 @@
-from flask import Flask, render_template, request, url_for, flash, redirect, abort
+from flask import Flask, render_template, request, url_for, flash, redirect, abort, g
+from flask_bcrypt import generate_password_hash, check_password_hash
 import sqlite3
+import atexit
 from dotenv import load_dotenv
-from flask_login import current_user, LoginManager
+from flask_login import current_user, LoginManager, UserMixin, login_user, logout_user
 import os
 
 load_dotenv()
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('app_key')
+
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+class User(UserMixin):
+    def __init__(self, id, username, password):
+        self.id = id
+        self.username = username
+        self.password = password
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
     return conn
 
-login_manager.login_view = 'login'
-
 @login_manager.user_loader
 def load_user(user_id):
+    conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM users WHERE id = ?', (user_id))
+    cursor.execute('SELECT * FROM users WHERE id = ?', (user_id,))
     user_data = cursor.fetchone()
-
-    pass
-
+    conn.close()
+    if user_data:
+        return User(user_data['id'], user_data['username'], user_data['password'])
+    else:
+        return None
+    
 def get_post(post_id):
     conn = get_db_connection()
     post = conn.execute('SELECT * FROM posts WHERE id = ?',
@@ -34,6 +45,60 @@ def get_post(post_id):
     if post is None:
         abort(404)
     return post
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
+        user_data = cursor.fetchone()
+        conn.close()
+
+        if user_data and check_password_hash(user_data['password'], password):
+            user = User(user_data['id'], user_data['username'], user_data['password'])
+            login_user(user)
+            flash('Logged in successfully!', 'success')
+            return redirect(url_for('index'))
+        else:
+            flash('Invalid username or password!', 'error')
+
+    return render_template('login.html')
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    logout_user()
+    flash('Logged out successfully!', 'success')
+    return redirect(url_for('index'))
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        hashed_password = generate_password_hash(password)
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
+        existing_user = cursor.fetchone()
+
+        if existing_user:
+            flash('Username already exists. Please choose a different one.', 'error')
+        else:
+            cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password))
+            conn.commit()
+            conn.close()
+
+            flash('User registered successfully!', 'success')
+            return redirect(url_for('login'))
+
+    return render_template('register.html')
 
 @app.route('/')
 def index():
@@ -63,16 +128,12 @@ def network_notes():
 def infrastructure_notes():
     return render_template('infrastructure_notes.html')
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
-
 @app.route('/create', methods=('GET', 'POST'))
 def create():
 
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
-    if current_user.role != 'admin':
+    if current_user.username != 'admin':
         abort(403)
     
     if request.method == 'POST':
@@ -98,7 +159,7 @@ def edit(id):
     post = get_post(id)
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
-    if current_user.role != 'admin':
+    if current_user.username != 'admin':
         abort(403)
     if request.method == 'POST':
         title = request.form['title']
@@ -125,7 +186,7 @@ def delete(id):
     post = get_post(id)
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
-    if current_user.role != 'admin':
+    if current_user.username != 'admin':
         abort(403)
     conn = get_db_connection()
     conn.execute('DELETE FROM posts WHERE id = ?', (id,))
