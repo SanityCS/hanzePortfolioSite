@@ -112,7 +112,6 @@ def about():
 def projects():
     return render_template('projects.html')
 
-
 @app.route('/posts', methods=['GET', 'POST'])
 def posts():
     conn = get_db_connection()

@@ -1,31 +1,31 @@
 {% extends 'base.html' %}
-
 {% block content %}
+<title>Sanity - Edit</title>
 <section class="flex-grow mx-auto mt-8 mb-4 px-8 py-4 bg-gray-800 rounded-md shadow-md">
   <h1 class="text-white text-3xl mb-5">Edit "{{ post['title'] }}"</h1>
   <form method="post">
-      <div class="mt-5">
-          <label for="title" class="text-white text-lg">Title</label>
-          <input type="text" name="title" placeholder="Post title"
-              value="{{ request.form['title'] or post['title'] }}"
-              class="block w-full py-2 px-4 mt-1 rounded-md bg-gray-300 text-gray-800 focus:outline-none focus:bg-white">
-      </div>
+    <div class="mt-5">
+      <label for="title" class="text-white text-lg">Title</label>
+      <input type="text" name="title" placeholder="Post title"
+                                      value="{{ request.form['title'] or post['title'] }}"
+                                      class="block w-full py-2 px-4 mt-1 rounded-md bg-gray-300 text-gray-800 focus:outline-none focus:bg-white">
+    </div>
 
-      <div class="mt-5">
-          <label for="content" class="text-white text-lg">Post Content</label>
-          <textarea name="content" placeholder="Post content" rows="10"
-              class="block w-full py-2 px-4 mt-1 rounded-md bg-gray-300 text-gray-800 focus:outline-none focus:bg-white">{{ request.form['content'] or post['content'] }}</textarea>
-      </div>
+    <div class="mt-5">
+      <label for="content" class="text-white text-lg">Post Content</label>
+      <textarea name="content" placeholder="Post content" rows="10"
+                                                          class="block w-full py-2 px-4 mt-1 rounded-md bg-gray-300 text-gray-800 focus:outline-none focus:bg-white">{{ request.form['content'] or post['content'] }}</textarea>
+    </div>
 
-      <button type="submit"
-          class="mt-5 py-2 px-4 bg-purple-500 text-white rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">Submit</button>
+    <button type="submit"
+            class="mt-5 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Submit</button>
   </form>
 
   <hr class="mt-8">
 
   <form action="{{ url_for('delete', id=post['id']) }}" method="POST">
-      <input type="submit" class="mt-4 py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
-          value="Delete Post" onclick="return confirm('Are you sure you want to delete the post?')">
+    <input type="submit" class="mt-4 py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
+                         value="Delete Post" onclick="return confirm('Are you sure you want to delete the post?')">
   </form>
 </section>
 {% endblock %}

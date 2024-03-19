@@ -1,78 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block content %}
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanity - Posts</title>
-    <link href="{{url_for('static', filename='css/output.css')}}" rel="stylesheet">
-    <link rel="icon" href="{{url_for('static', filename='media/website_icon.png')}}" type="image/png">
-  </head>
-
-  <body class="font-sans bg-purple-300 flex flex-col min-h-screen">
-    <header class="bg-gray-900 text-white text-center py-4">
-      <h1 class="text-2xl">Sanity</h1>
-      <p class="text-sm">Security Student</p>
-      <nav>
-        <a href="{{url_for('index')}}" class="text-white hover:underline">Home</a>
-        <a href="{{url_for('about')}}" class="text-white hover:underline ml-4">About</a>
-        <a href="{{url_for('posts')}}" class="text-white hover:underline ml-4">Posts</a>
-        <a href="{{url_for('projects')}}" class="text-white hover:underline ml-4">Projects</a>
-        {% if current_user.is_authenticated %}
-            <form action="{{ url_for('logout') }}" method="post" class="inline">
-                <button type="submit" class="text-white hover:underline ml-4">Logout</button>
-            </form>
-            {% else %}
-            <a href="{{ url_for('login') }}" class="text-white hover:underline ml-4">Login</a>
-            {% endif %}
-      </nav>
-    </header>
-
-    <main class="">
-      {% block content %}
-      <section class="mt-8 mb-4 px-8 py-4 bg-gray-800 rounded-md shadow-md relative max-w-3xl mx-auto">
-        <h1 class="text-purple-500 text-2xl py-8">Posts</h1>
-        <a href="{{ url_for('create') }}" class="absolute top-0 right-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create New Post</a>
-        <div class="">
-          {% for post in posts %}
-          <div class="bg-blue-500 rounded-md shadow-md m-4 mb-4 text-sm relative">
-            <div class="p-6">
-              <h2 class="text-white text-lg mb-2">{{post['title']}}</h2>
-              <p class="text-white mb-2">{{post['created'] }}</p>
-              <p class="text-white">{{post['content']}}</p>
-              <a class="text-white text-lg absolute bottom-0 right-0 mr-4 mb-4" href="{{ url_for('edit', id=post['id']) }}">Edit</a>
-            </div>
-          </div>
-          {% endfor %}
+<main class="flex-grow">
+  <title>Sanity - Posts</title>
+  <section class="mt-8 mb-4 px-8 py-4 bg-gray-800 rounded-md shadow-md relative max-w-3xl mx-auto">
+    <h1 class="text-blue-500 text-2xl py-8">Posts</h1>
+    <a href="{{ url_for('create') }}" class="absolute top-0 right-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create New Post</a>
+    <div class="">
+      {% for post in posts %}
+      <div class="bg-blue-500 rounded-md shadow-md m-4 mb-4 text-sm relative">
+        <div class="p-6">
+          <h2 class="text-white text-lg mb-2">{{post['title']}}</h2>
+          <p class="text-white mb-2">{{post['created'] }}</p>
+          <p class="text-white">{{post['content']}}</p>
+          <a class="text-white text-lg absolute bottom-0 right-0 mr-4 mb-4" href="{{ url_for('edit', id=post['id']) }}">Edit</a>
         </div>
-      </section>
-      {% endblock %}
-      {% if get_flashed_messages() %}
-      <section id="flash-messages" class="fixed top-3/4 left-1/2 transform -translate-x-1/2 bg-gray-800 rounded-md shadow-md p-4">
-        <div class="content">
-            {% for message in get_flashed_messages() %}
-            <div class="alert bg-purple-600 text-white rounded-md py-2 px-4 mb-2">{{ message }}</div>
-            {% endfor %}
-        </div>
-    </section>
-    {% endif %}
-    <script>
-      setTimeout(function() {
-          var flashMessages = document.getElementById('flash-messages');
-          if (flashMessages) {
-              flashMessages.style.opacity = '0';
-              setTimeout(function() {
-                  flashMessages.remove();
-              }, 500);
-          }
-      }, 3000);
-  </script>
-    </main>
-
-    <footer class="bg-gray-900 text-white text-center py-4 mt-auto">
-      <p>&copy; 2024 Sanity. All rights reserved.</p>
-    </footer>
-
-  </body>
-
-</html>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+{% endblock %}
