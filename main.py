@@ -1,17 +1,30 @@
 from flask import Flask, render_template, request, url_for, flash, redirect, abort
 import sqlite3
 from dotenv import load_dotenv
+from flask_login import current_user, LoginManager
 import os
 
 load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('app_key')
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
     return conn
+
+login_manager.login_view = 'login'
+
+@login_manager.user_loader
+def load_user(user_id):
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM users WHERE id = ?', (user_id))
+    user_data = cursor.fetchone()
+
+    pass
 
 def get_post(post_id):
     conn = get_db_connection()
@@ -42,7 +55,6 @@ def posts():
     conn.close()
     return render_template('posts.html', posts=posts)
 
-
 @app.route('/network_notes')
 def network_notes():
     return render_template('network_notes.html')
@@ -51,8 +63,18 @@ def network_notes():
 def infrastructure_notes():
     return render_template('infrastructure_notes.html')
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
 @app.route('/create', methods=('GET', 'POST'))
 def create():
+
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    if current_user.role != 'admin':
+        abort(403)
+    
     if request.method == 'POST':
         title = request.form['title']
         content = request.form['content']
@@ -74,7 +96,10 @@ def create():
 @app.route('/<int:id>/edit/', methods=('GET', 'POST'))
 def edit(id):
     post = get_post(id)
-
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    if current_user.role != 'admin':
+        abort(403)
     if request.method == 'POST':
         title = request.form['title']
         content = request.form['content']
@@ -98,6 +123,10 @@ def edit(id):
 @app.route('/<int:id>/delete/', methods=('POST',))
 def delete(id):
     post = get_post(id)
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    if current_user.role != 'admin':
+        abort(403)
     conn = get_db_connection()
     conn.execute('DELETE FROM posts WHERE id = ?', (id,))
     conn.commit()
