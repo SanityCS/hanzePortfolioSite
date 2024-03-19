@@ -28,12 +28,15 @@ De website heeft een database met 2 tabellen, deze database runt op sqlite3
 
 * Voer in dit bestand de volgende key in: app_key=ea579ce9def1ffca2d3dfd78a6aa9c9760b270950268405b
 
-main.py runt de Flask server
+### main.py runt de Flask server
+
 Voer deze uit met het commando:
 ```bash
 py .\main.py
 ```
-init_db.py initializeerd de database
+
+### init_db.py initializeerd de database
+
 Voer deze uit met het commando:
 ```bash
 py .\init_db.py
