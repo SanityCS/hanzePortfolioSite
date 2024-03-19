@@ -4,11 +4,11 @@
 Zorg ervoor dat alle requirements vanuit de requirements.txt zijn geïnstalleerd, zonder veel van deze packages werkt de website niet hoe hij moet werken
 
 ## Inloggegevens
-admin account:
+* admin account:
     * Username : admin
     * Password : d&QAzB&P@3LM2hDpGfwJhR4E%zG*E9
 
-fake account (om te laten zien dat je alleen posts aan kan maken als admin):
+* fake account (om te laten zien dat je alleen posts aan kan maken als admin):
     * Username : nietadmin
     * Password : 1234
 
