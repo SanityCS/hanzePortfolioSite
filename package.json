@@ -9,7 +9,7 @@
     "flask": "py main.py"
   },
   "keywords": [],
-  "author": "",
+  "author": "Sanity (Evan Dokter)",
   "license": "ISC",
   "devDependencies": {
     "tailwindcss": "^3.4.1"
