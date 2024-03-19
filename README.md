@@ -21,9 +21,12 @@ De website heeft een database met 2 tabellen, deze database runt op sqlite3
 # Installatie
 
 Installeer alle requirements uit requirements.txt
+
 Omdat de website tailwind gebruikt is er geen specifiek CSS document waar alle styles in staan, de styles zijn allemaal direct in het HTML document geïntegreerd. Als het goed is er daarom ook geen installatie van tailwind of andere frameworks nodig. Het zou vanaf de download direct moeten runnen.
 
-Om alle functionaliteiten te laten werken is het belangrijk om een .env file aan te maken genaamt .env (de naam is volledig leeg). Voer in dit bestand de volgende key in: app_key=ea579ce9def1ffca2d3dfd78a6aa9c9760b270950268405b
+Om alle functionaliteiten te laten werken is het belangrijk om een .env file aan te maken genaamt .env (de naam is volledig leeg). 
+
+Voer in dit bestand de volgende key in: app_key=ea579ce9def1ffca2d3dfd78a6aa9c9760b270950268405b
 
 main.py runt de Flask server
 Voer deze uit met het commando:
