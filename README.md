@@ -3,6 +3,10 @@
 ## Belangrijk!
 Zorg ervoor dat alle requirements vanuit de requirements.txt zijn geïnstalleerd, zonder veel van deze packages werkt de website niet hoe hij moet werken
 
+```bash
+pip install -r requirements.txt
+```
+
 ## Inloggegevens
 * admin account:
     * Username : admin
