@@ -1,4 +1,6 @@
 # hanzePortfolioSite
+
+Student ID: 439545, Evan Dokter
  
 ## Belangrijk!
 Zorg ervoor dat alle requirements vanuit de requirements.txt zijn geïnstalleerd, zonder veel van deze packages werkt de website niet hoe hij moet werken
