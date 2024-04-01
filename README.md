@@ -18,6 +18,8 @@ pip install -r requirements.txt
     * Username : nietadmin
     * Password : 1234
 
+Om een nieuw account aan te maken, moet je naar /register handmatig toe gaan.
+
 # Functionaliteiten
 
 De website runt volledig op python, naast 1 simpel JavaScript blokje. Dit JavaScript blokje is ervoor gemaakt zodat de flash messages van flask verdwijnen na 3 seconden.
