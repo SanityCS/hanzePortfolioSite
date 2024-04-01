@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from flask_login import current_user, LoginManager, UserMixin, login_user, logout_user
 import os
 
-load_dotenv()
+load_dotenv() # Environment variabelen laden vanuit .env, hierin staat de app key die nodig is om een flask server te runnen
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('app_key')
 
@@ -22,7 +22,7 @@ class User(UserMixin):
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
-    conn.row_factory = sqlite3.Row
+    conn.row_factory = sqlite3.Row # Resultaten opvragen als een dictionary, in plaats van tuples (), komt het nu in rijen met kolommen te staan.
     return conn
 
 @login_manager.user_loader
@@ -43,7 +43,7 @@ def get_post(post_id):
                         (post_id,)).fetchone()
     conn.close()
     if post is None:
-        abort(404)
+        abort(404) # Als een post niet gevonden is, geef een 404 error
     return post
 
 @app.route('/login', methods=['GET', 'POST'])
