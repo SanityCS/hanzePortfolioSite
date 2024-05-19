@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<main class="flex-grow">
+  <title>Sanity - Posts</title>
+  <section class="mt-8 mb-4 px-8 py-4 bg-gray-800 rounded-md shadow-md relative max-w-3xl mx-auto">
+    <h1 class="text-blue-500 text-2xl py-8">Posts</h1>
+    <a href="{{ url_for('main.create') }}" class="absolute top-0 right-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create New Post</a>
+    <div class="">
+      {% for post in posts %}
+      <div class="bg-blue-500 rounded-md shadow-md m-4 mb-4 text-sm relative">
+        <div class="p-6">
+          <h2 class="text-white text-lg mb-2">{{post['title']}}</h2>
+          <p class="text-white mb-2">{{post['created'] }}</p>
+          <p class="text-white">{{post['content']}}</p>
+          <a class="text-white text-lg absolute bottom-0 right-0 mr-4 mb-4" href="{{ url_for('main.edit', id=post['id']) }}">Edit</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+{% endblock %}
