@@ -6,7 +6,7 @@ Student ID: 439545, Evan Dokter
 Zorg ervoor dat alle requirements vanuit de requirements.txt zijn geïnstalleerd, zonder veel van deze packages werkt de website niet hoe hij moet werken
 
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Inloggegevens
@@ -40,13 +40,13 @@ De website heeft een database met 2 tabellen, deze database runt op sqlite3
 
 Voer deze uit met het commando:
 ```bash
-py .\main.py
+python3 .\main.py
 ```
 
 ### init_db.py initializeerd de database
 
 Voer deze uit met het commando:
 ```bash
-py .\init_db.py
+python3 .\init_db.py
 ```
 
